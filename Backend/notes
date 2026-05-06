@@ -1,0 +1,9 @@
+Terminal 1 — Backend:
+cd gcek-exam-chatbot
+venv\Scripts\Activate.ps1
+python api.py
+Terminal 2 — Frontend:
+cd gcek-exam-chatbot\frontend
+python -m http.server 3000
+Then open http://local
+host:3000 in browser.
