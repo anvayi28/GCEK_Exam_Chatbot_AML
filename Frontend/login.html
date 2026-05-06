@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GCEK Exam Assistant — Login</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d1117;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Left panel — branding */
+    .left {
+      flex: 1;
+      background: linear-gradient(135deg, #0a2a1e 0%, #0d1117 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+      border-right: 1px solid #30363d;
+    }
+
+    .brand-icon {
+      width: 56px;
+      height: 56px;
+      background: #1D9E75;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 28px;
+    }
+
+    .brand-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: #e6edf3;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .brand-title span { color: #1D9E75; }
+
+    .brand-desc {
+      font-size: 15px;
+      color: #7d8590;
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    .features { display: flex; flex-direction: column; gap: 14px; }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #8b949e;
+      font-size: 14px;
+    }
+
+    .feature-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #1D9E75;
+      flex-shrink: 0;
+    }
+
+    /* Right panel — form */
+    .right {
+      width: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 50px;
+      background: #0d1117;
+    }
+
+    .form-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #e6edf3;
+      margin-bottom: 6px;
+    }
+
+    .form-sub {
+      font-size: 14px;
+      color: #7d8590;
+      margin-bottom: 32px;
+    }
+
+    .form-sub a {
+      color: #1D9E75;
+      text-decoration: none;
+    }
+
+    .form-sub a:hover { text-decoration: underline; }
+
+    .field { margin-bottom: 18px; }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #8b949e;
+      margin-bottom: 7px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 11px 14px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #e6edf3;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .field input:focus { border-color: #1D9E75; }
+    .field input::placeholder { color: #484f58; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #1D9E75;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+      margin-top: 6px;
+      font-family: inherit;
+    }
+
+    .submit-btn:hover { background: #0F6E56; }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled { background: #30363d; cursor: not-allowed; }
+
+    .error-box {
+      background: rgba(226,75,74,0.1);
+      border: 1px solid rgba(226,75,74,0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #f85149;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+      color: #484f58;
+      font-size: 12px;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #30363d;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: #484f58;
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 768px) {
+      .left { display: none; }
+      .right { width: 100%; padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Left branding panel -->
+  <div class="left">
+    <div class="brand-icon">G</div>
+    <div class="brand-title">GCEK Exam<br><span>Assistant</span></div>
+    <div class="brand-desc">
+      Your AI-powered guide to GCEK exam rules, regulations, and policies. Get instant answers based on official documents.
+    </div>
+    <div class="features">
+      <div class="feature"><div class="feature-dot"></div>Answers from official GCEK exam documents</div>
+      <div class="feature"><div class="feature-dot"></div>Know hall ticket, attendance and malpractice rules</div>
+      <div class="feature"><div class="feature-dot"></div>Save and revisit your past conversations</div>
+      <div class="feature"><div class="feature-dot"></div>Available 24/7 — no waiting, instant answers</div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="right">
+    <div class="form-title">Welcome back</div>
+    <div class="form-sub">
+      Don't have an account? <a href="signup.html">Sign up free</a>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="email" placeholder="your@email.com" />
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter your password"
+             onkeydown="if(event.key==='Enter') login()" />
+    </div>
+
+    <button class="submit-btn" id="loginBtn" onclick="login()">Sign in</button>
+
+    <div class="divider">or</div>
+
+    <div style="text-align:center; font-size:13px; color:#7d8590;">
+      New to GCEK Assistant? <a href="signup.html" style="color:#1D9E75;text-decoration:none;">Create an account →</a>
+    </div>
+
+    <div class="footer-note">
+      Government College of Engineering Kannur<br>
+      Exam Rules Chatbot — NEP 2020
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = "http://localhost:8000";
+
+async function login() {
+  const email    = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const btn      = document.getElementById("loginBtn");
+  const errorBox = document.getElementById("errorBox");
+
+  errorBox.style.display = "none";
+
+  if (!email || !password) {
+    showError("Please enter your email and password.");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Signing in...";
+
+  try {
+    const res = await fetch(`${API}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(data.detail || "Login failed. Please try again.");
+      return;
+    }
+
+    // Save token and user info
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("name",  data.name);
+    localStorage.setItem("email", data.email);
+
+    // Redirect to chat
+    window.location.href = "index.html";
+
+  } catch (err) {
+    showError("Cannot connect to server. Make sure the API is running.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Sign in";
+  }
+}
+
+function showError(msg) {
+  const box = document.getElementById("errorBox");
+  box.textContent = msg;
+  box.style.display = "block";
+}
+
+// If already logged in, skip to chat
+if (localStorage.getItem("token")) {
+  window.location.href = "index.html";
+}
+</script>
+</body>
+</html>

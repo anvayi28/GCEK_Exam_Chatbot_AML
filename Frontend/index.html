@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GCEK Exam Assistant</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">G</div>
+        <div>
+          <div class="logo-title">GCEK Assistant</div>
+          <div class="logo-sub">Exam Rules Chatbot</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="new-chat-btn" onclick="newChat()">+ New Chat</button>
+
+    <div class="sidebar-section-label">Recent Chats</div>
+    <div class="session-list" id="sessionList">
+      <div style="font-size:12px;color:#484f58;padding:8px 10px;">No chats yet</div>
+    </div>
+
+    <div class="sidebar-section-label" style="margin-top:auto;">Suggested</div>
+    <div class="suggestions-list">
+      <div class="suggestion-item" onclick="askSuggestion('What is the minimum attendance required?')">Minimum attendance?</div>
+      <div class="suggestion-item" onclick="askSuggestion('What are the malpractice rules?')">Malpractice rules</div>
+      <div class="suggestion-item" onclick="askSuggestion('What is ESE?')">What is ESE?</div>
+      <div class="suggestion-item" onclick="askSuggestion('What are the grace marks rules?')">Grace marks rules</div>
+      <div class="suggestion-item" onclick="askSuggestion('What is an open elective subject?')">Open elective</div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-row">
+        <div class="user-avatar" id="userAvatar">S</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">Student</div>
+          <div class="user-email" id="userEmail"></div>
+        </div>
+        <button class="logout-btn" onclick="logout()" title="Logout">↩</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main chat area -->
+  <div class="main">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">GCEK Exam Rules Assistant</div>
+        <div class="topbar-sub">Powered by RAG + Llama 3.3 · 723 chunks indexed</div>
+      </div>
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        Online
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="messages" id="messages">
+      <div class="msg bot">
+        <div class="avatar avatar-bot">G</div>
+        <div class="bubble-wrap">
+          <div class="bubble bubble-bot">
+            Hello! I'm the GCEK Exam Assistant.<br><br>
+            Ask me anything about exam rules, hall tickets, attendance, malpractice regulations, or grading policies — I'll find the answer from the official GCEK documents!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input area -->
+    <div class="input-area">
+      <div class="chips" id="chips">
+        <div class="chip" onclick="askSuggestion('What is the minimum attendance required?')">Attendance rules</div>
+        <div class="chip" onclick="askSuggestion('What are the malpractice rules?')">Malpractice</div>
+        <div class="chip" onclick="askSuggestion('What is ESE?')">What is ESE?</div>
+        <div class="chip" onclick="askSuggestion('What are the grace marks rules?')">Grace marks</div>
+      </div>
+      <div class="input-row">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Ask about exam rules, schedules, hall tickets..."
+          onkeydown="if(event.key==='Enter') sendMessage()"
+          autocomplete="off"
+        />
+        <button class="mic-btn" onclick="toggleVoice()" id="micBtn" title="Speak your question">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="12" y1="19" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="8" y1="23" x2="16" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

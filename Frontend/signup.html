@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GCEK Exam Assistant — Sign Up</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d1117;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .left {
+      flex: 1;
+      background: linear-gradient(135deg, #0a2a1e 0%, #0d1117 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+      border-right: 1px solid #30363d;
+    }
+
+    .brand-icon {
+      width: 56px;
+      height: 56px;
+      background: #1D9E75;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 28px;
+    }
+
+    .brand-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: #e6edf3;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .brand-title span { color: #1D9E75; }
+
+    .brand-desc {
+      font-size: 15px;
+      color: #7d8590;
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    .steps { display: flex; flex-direction: column; gap: 20px; }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(29,158,117,0.15);
+      border: 1px solid rgba(29,158,117,0.3);
+      color: #1D9E75;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-text { font-size: 14px; color: #8b949e; line-height: 1.5; }
+    .step-text strong { color: #c9d1d9; font-weight: 500; }
+
+    .right {
+      width: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 50px;
+      background: #0d1117;
+    }
+
+    .form-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #e6edf3;
+      margin-bottom: 6px;
+    }
+
+    .form-sub {
+      font-size: 14px;
+      color: #7d8590;
+      margin-bottom: 32px;
+    }
+
+    .form-sub a { color: #1D9E75; text-decoration: none; }
+    .form-sub a:hover { text-decoration: underline; }
+
+    .field { margin-bottom: 16px; }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #8b949e;
+      margin-bottom: 7px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 11px 14px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #e6edf3;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .field input:focus { border-color: #1D9E75; }
+    .field input::placeholder { color: #484f58; }
+
+    .field .hint {
+      font-size: 11px;
+      color: #484f58;
+      margin-top: 5px;
+    }
+
+    .strength-bar {
+      height: 3px;
+      border-radius: 2px;
+      background: #30363d;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .strength-fill {
+      height: 100%;
+      border-radius: 2px;
+      width: 0%;
+      transition: width .3s, background .3s;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #1D9E75;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+      margin-top: 8px;
+      font-family: inherit;
+    }
+
+    .submit-btn:hover { background: #0F6E56; }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled { background: #30363d; cursor: not-allowed; }
+
+    .error-box {
+      background: rgba(226,75,74,0.1);
+      border: 1px solid rgba(226,75,74,0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #f85149;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .success-box {
+      background: rgba(29,158,117,0.1);
+      border: 1px solid rgba(29,158,117,0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #1D9E75;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .terms {
+      font-size: 12px;
+      color: #484f58;
+      text-align: center;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: #484f58;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .left { display: none; }
+      .right { width: 100%; padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Left branding panel -->
+  <div class="left">
+    <div class="brand-icon">G</div>
+    <div class="brand-title">Join GCEK<br><span>Exam Assistant</span></div>
+    <div class="brand-desc">
+      Create your free account and get instant answers to all your exam rule questions.
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Create your account</strong><br>Register with your email address</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Ask your questions</strong><br>Type any exam rule question in plain English</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Get instant answers</strong><br>AI finds the exact rule from official GCEK documents</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="right">
+    <div class="form-title">Create account</div>
+    <div class="form-sub">
+      Already have an account? <a href="login.html">Sign in</a>
+    </div>
+
+    <div class="error-box"   id="errorBox"></div>
+    <div class="success-box" id="successBox"></div>
+
+    <div class="field">
+      <label>Full name</label>
+      <input type="text" id="name" placeholder="Your full name" />
+    </div>
+
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="email" placeholder="your@email.com" />
+      <div class="hint">Use your college or personal email</div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Create a strong password"
+             oninput="checkStrength(this.value)" />
+      <div class="strength-bar">
+        <div class="strength-fill" id="strengthFill"></div>
+      </div>
+      <div class="hint" id="strengthLabel">Enter a password</div>
+    </div>
+
+    <div class="field">
+      <label>Confirm password</label>
+      <input type="password" id="confirm" placeholder="Repeat your password"
+             onkeydown="if(event.key==='Enter') signup()" />
+    </div>
+
+    <button class="submit-btn" id="signupBtn" onclick="signup()">Create account</button>
+
+    <div class="terms">
+      By signing up you agree to use this chatbot responsibly<br>for academic purposes only.
+    </div>
+
+    <div class="footer-note">
+      Government College of Engineering Kannur<br>
+      Exam Rules Chatbot — NEP 2020
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = "http://localhost:8000";
+
+function checkStrength(pw) {
+  const fill  = document.getElementById("strengthFill");
+  const label = document.getElementById("strengthLabel");
+  let score = 0;
+  if (pw.length >= 6)  score++;
+  if (pw.length >= 10) score++;
+  if (/[A-Z]/.test(pw)) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+
+  const levels = [
+    { pct: "0%",   color: "#30363d", text: "Enter a password" },
+    { pct: "25%",  color: "#f85149", text: "Weak" },
+    { pct: "50%",  color: "#e3b341", text: "Fair" },
+    { pct: "75%",  color: "#1D9E75", text: "Good" },
+    { pct: "100%", color: "#1D9E75", text: "Strong" },
+  ];
+  const lvl = levels[Math.min(score, 4)];
+  fill.style.width      = lvl.pct;
+  fill.style.background = lvl.color;
+  label.textContent     = lvl.text;
+}
+
+async function signup() {
+  const name     = document.getElementById("name").value.trim();
+  const email    = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const confirm  = document.getElementById("confirm").value;
+  const btn      = document.getElementById("signupBtn");
+
+  document.getElementById("errorBox").style.display   = "none";
+  document.getElementById("successBox").style.display = "none";
+
+  if (!name || !email || !password || !confirm) {
+    showError("Please fill in all fields.");
+    return;
+  }
+  if (password !== confirm) {
+    showError("Passwords do not match.");
+    return;
+  }
+  if (password.length < 6) {
+    showError("Password must be at least 6 characters.");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Creating account...";
+
+  try {
+    const res = await fetch(`${API}/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(data.detail || "Signup failed. Please try again.");
+      return;
+    }
+
+    // Save token and redirect
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("name",  data.name);
+    localStorage.setItem("email", data.email);
+
+    document.getElementById("successBox").textContent = "Account created! Redirecting...";
+    document.getElementById("successBox").style.display = "block";
+
+    setTimeout(() => window.location.href = "index.html", 1000);
+
+  } catch (err) {
+    showError("Cannot connect to server. Make sure the API is running.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Create account";
+  }
+}
+
+function showError(msg) {
+  const box = document.getElementById("errorBox");
+  box.textContent = msg;
+  box.style.display = "block";
+}
+
+if (localStorage.getItem("token")) {
+  window.location.href = "index.html";
+}
+</script>
+</body>
+</html>
